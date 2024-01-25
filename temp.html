@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Zeichnen auf der Canvas</title>
+		<style>	
+			body, html{padding:0; margin:0;}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>	
+	<body onclick="putMonster(event)">
+		<canvas id="myCanvas" width="700" height="350"></canvas>
+		<script src="dauvas.js"></script>
+		
+		<script>
+			function monster(x,y,a){
+				setFillColor("green");
+				fillCircle(x,y,a);
+				for(var w=0; w<180; w=w+30)
+					fillRectCenterRotate(x,y,3*a, 0.15*a,w);					
+				//Augen
+				setFillColor("white");
+				fillOval(x+0.3*a, y-0.5*a, 0.1*a, 0.2*a);
+				fillOval(x-0.3*a, y-0.5*a, 0.1*a, 0.2*a);
+				setFillColor("black");
+				fillOval(x+0.3*a, y-0.4*a, 0.04*a, 0.06*a);
+				fillOval(x-0.3*a, y-0.4*a, 0.04*a, 0.06*a);
+				//Mund
+				fillRectCenter(x,y+0.3*a, 0.5*a, 0.2*a);
+			}
+			//monster(300,500,50);
+			//setTimeout(monster,1000,200,200,30);			// erst dt in ms, dann andere Parameter
+
+			/*
+			var x=500
+			var y=500
+			setInterval(step,100)
+
+			function step(){
+				monster(x,y,50);
+				x=x+50;
+			}
+			*/
+
+			function runAnim1(){
+				var x=500;
+				var y=500;
+				var i=0;								//frames
+				animation=setInterval(monsterStep,100);
+				function monsterStep(){					// nested function wegen scope der vars
+					if (i++==10) 
+						clearInterval(animation);
+					monster(x,y,50);
+					x+=30;
+				}
+			}
+
+			//runAnim1();
+
+			function runAnim2(){
+				var x=500, y=500, vx=20, vy=10, dt=20;
+				animation=setInterval(monsterStep,dt);
+				function monsterStep(){					
+					clearScreen();
+					monster(x,y,50);
+					x+=vx; y+=vy;
+					if(x>xmax || x<0) vx=-vx;
+					if(y>ymax || y<0) vy=-vy;	
+				}
+			}
+
+			function runAnim3(){
+				var x=500, y=500,size=5, dt=20, dSize=5;
+				animation=setInterval(monsterStep,dt);
+				function monsterStep(){					
+					//clearScreen();		// nur bei einer Animation Screen löschen
+					if (size<0) size=0;
+					monster(x,y,size);
+					size+=dSize;
+					if (size>500 || size<0)
+						dSize=-dSize;	
+				}
+			}
+			
+			//<body onclick="putMonster(event)">					wenn kein clear...
+			function putMonster(evt){
+				let x = event.clientX;
+  				let y = event.clientY;
+				monster(x,y,30);
+			}
+
+			//runAnim2()
+			//runAnim3()			// sicher beide Monster in eine Animation, aber so geht es auch zusammen
+		</script>
+			
+		</body>
+</html>
+
+
+
+<!--
+/*
+var xmax, ymax										// Bildschirmgrösse in Pixeln, Ursprung oben links
+function fillRect(x1,y1,w,h)						// ausgefülltes Rechteck: x1,y1, width, height
+function rect(x1,y1,w,h)							// ohne Füllung, siehe setLineWidth
+function fillRectCenter(xM,yM,width,height)			// zentriertes, ausgefülltes Rechteck: x,y: Zentrum des Rechtecks
+function rectCenter(x,y,width,height)				// ohne Füllung, siehe setLineWidth
+function fillRectCenterRotate(x,y,width,height,angle);  // ...gedreht um Winkel alpha im Uhrzeigersinn
+function rectCenterRotate(x,y,width,height,angle);		// ...gedreht um Winkel alpha im Uhrzeigersinn
+
+function fillTriangle(x1,y1,x2,y2,x3,y3)			// Drreieck aus 3 Punkte
+function triangle(x1,y1,x2,y2,x3,y3)						
+function fillEquiTriangle(x1,y1,a)					// gleichseitiges Dreieck
+function equiTriangle(x,y,a)
+						
+function line(x1,y1,x2,y2)
+function fillCircle(x,y,radius)
+function circle(x,y,radius)
+function fillOval(x,y,rx,ry);
+function oval(x,y,rx,ry);
+fillOvalRotate(x,y,rx,ry,alpha);
+function drawText(x,y,text, size);
+function drawTextFont(x,y,text,size,font)
+function fillPoly(flatArray)						// Polygon e.g. [0,0,100,100,70,0]
+function poly(flatArray)
+
+function setFillColor(farbe)						// z.B. "FF2288" im Hex Format oder "blue"
+function setFillColorRGB(r,g,b)						
+function setLineColor(farbe)
+function setLineColorRGB(r,g,b)
+function setLineWidth(d)
+function setBackgroundColorRGB(r,g,b)
+function setBackgroundColor(farbe)					// siehe auch http://tomheller.de/theholycymbal/html-farben.html
+function clearScreen()
+resize();											// passt Fenster dem Bildschirm an
+
+Profidokumentation: https://www.w3schools.com/html/html5_canvas.asp and https://www.w3schools.com/tags/ref_canvas.asp
+*/
+-->

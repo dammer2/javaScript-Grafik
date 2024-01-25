@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Zeichnen auf der Canvas</title>
+		<style>	
+			body, html{padding:0; margin:0;}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>	
+	<body>
+		<canvas id="myCanvas" width="700" height="350"></canvas>
+		<script src="dauvas.js"></script>
+		
+		<script>
+			
+			function monster(x,y,a){
+				setFillColor("green");
+				fillCircle(x,y,a);
+				for(var w=0; w<180; w=w+30)
+					fillRectCenterRotate(x,y,3*a, 0.15*a,w);					
+				//Augen
+				setFillColor("white");
+				fillOval(x+0.3*a, y-0.5*a, 0.1*a, 0.2*a);
+				fillOval(x-0.3*a, y-0.5*a, 0.1*a, 0.2*a);
+				setFillColor("black");
+				fillOval(x+0.3*a, y-0.4*a, 0.04*a, 0.06*a);
+				fillOval(x-0.3*a, y-0.4*a, 0.04*a, 0.06*a);
+				//Mund
+				fillRectCenter(x,y+0.3*a, 0.5*a, 0.2*a);
+			}
+		function arrayAnimation1(){
+			var monsters=[];
+			var n=50;		//Anzahl
+			var a=30;		//Grösse
+			for(var i=0; i<n; i++){
+				let x=Math.floor(Math.random()*xmax);
+				let y=Math.floor(Math.random()*ymax);
+				monsters.push([x,y,a]);
+			}
+			function show(){
+				for(var i=0; i<monsters.length; i++){
+					monster(monsters[i][0],monsters[i][1],monsters[i][2]);
+				}
+			}
+			var anima=setInterval(step,50);
+			function step(){
+				var zitter=5;
+				clearScreen();
+				show();
+				for(m of monsters){
+					m[0]+=Math.random()*2*zitter-zitter;
+					m[1]+=Math.random()*2*zitter-zitter;
+					m[2]+=Math.random()*2*zitter-zitter;
+					if(m[2]<0) m[2]=0;
+				}
+			}
+		}
+
+		arrayAnimation1();
+
+		</script>
+			
+		</body>
+</html>
+
+
+

@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Von Renato Papic 2023</title>
+		<style>	
+			body, html{padding:0; margin:0;}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>	
+	<body>
+		<canvas id="myCanvas" width="700" height="350"></canvas>
+		<script src="dauvas.js"></script>
+		
+		<script>
+			
+		function monster2(x,y,a){
+			setFillColor("black");
+			fillCircle(x,y,a);
+			for(var w=0; w<180; w=w+30)
+			fillCircle(x+0.7*a, y-1.15*a, 0.6*a);
+			fillCircle(x-0.7*a, y-1.15*a, 0.6*a);
+			setFillColor("pink")
+			fillOval(x+0.3*a, y-0.35*a, 0.35*a, 0.5*a);
+			fillOval(x-0.3*a, y-0.35*a, 0.35*a, 0.5*a);
+			fillOval(x, y+0.3*a, 0.75*a, 0.55*a);
+			setFillColor("black")
+			fillOval(x, y+0.3*a, 0.45*a, 0.35*a);
+			setFillColor("pink")
+			fillOval(x, y+0.23*a, 0.5*a, 0.35*a);
+			setFillColor("white")
+			fillOval(x+0.3*a, y-0.2*a, 0.15*a, 0.3*a);
+			fillOval(x-0.3*a, y-0.2*a, 0.15*a, 0.3*a);
+			setFillColor("black");
+			fillOval(x+0.3*a, y-0.1*a, 0.06*a, 0.1*a);
+			fillOval(x-0.3*a, y-0.1*a, 0.06*a, 0.1*a);
+			fillOval(x,y+0.2*a,0.22*a, 0.16*a);
+		}
+		for(var i=0; i<100; i++){	
+			var x=Math.floor(Math.random()*xmax);
+			var y=Math.floor(Math.random()*ymax);
+			monster2(x,y,60)
+		}	
+			</script>
+			
+		</body>
+</html>
+
+
+
+<!--
+/*
+var xmax, ymax										// Bildschirmgrösse in Pixeln, Ursprung oben links
+function fillRect(x1,y1,w,h)						// ausgefülltes Rechteck: x1,y1, width, height
+function rect(x1,y1,w,h)							// ohne Füllung, siehe setLineWidth
+function fillRectCenter(xM,yM,width,height)			// zentriertes, ausgefülltes Rechteck: x,y: Zentrum des Rechtecks
+function rectCenter(x,y,width,height)				// ohne Füllung, siehe setLineWidth
+function fillRectCenterRotate(x,y,width,height,angle);  // ...gedreht um Winkel alpha im Uhrzeigersinn
+function rectCenterRotate(x,y,width,height,angle);		// ...gedreht um Winkel alpha im Uhrzeigersinn
+
+function fillTriangle(x1,y1,x2,y2,x3,y3)			// Drreieck aus 3 Punkte
+function triangle(x1,y1,x2,y2,x3,y3)						
+function fillEquiTriangle(x1,y1,a)					// gleichseitiges Dreieck
+function equiTriangle(x,y,a)
+						
+function line(x1,y1,x2,y2)
+function fillCircle(x,y,radius)
+function circle(x,y,radius)
+function fillOval(x,y,rx,ry);
+function oval(x,y,rx,ry);
+fillOvalRotate(x,y,rx,ry,alpha);
+function drawText(x,y,text, size);
+function drawTextFont(x,y,text,size,font)
+function fillPoly(flatArray)						// Polygon e.g. [0,0,100,100,70,0]
+function poly(flatArray)
+
+function setFillColor(farbe)						// z.B. "FF2288" im Hex Format oder "blue"
+function setFillColorRGB(r,g,b)						
+function setLineColor(farbe)
+function setLineColorRGB(r,g,b)
+function setLineWidth(d)
+function setBackgroundColorRGB(r,g,b)
+function setBackgroundColor(farbe)					// siehe auch http://tomheller.de/theholycymbal/html-farben.html
+function clearScreen()
+resize();											// passt Fenster dem Bildschirm an
+
+Profidokumentation: https://www.w3schools.com/html/html5_canvas.asp and https://www.w3schools.com/tags/ref_canvas.asp
+*/
+-->

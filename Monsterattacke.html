@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Zeichnen auf der Canvas</title>
+		<style>	
+			body, html{padding:0; margin:0;}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>	
+	<body>
+		<canvas id="myCanvas" width="700" height="350"></canvas>
+		<script src="dauvas.js"></script>
+		
+		<script>
+			
+			function monster1(x,y,a){
+				setFillColor("green");
+				fillCircle(x,y,a);
+				for(var w=0; w<180; w=w+30)
+					fillRectCenterRotate(x,y,3*a, 0.15*a,w);					
+				//Augen
+				setFillColor("white");
+				fillOval(x+0.3*a, y-0.5*a, 0.1*a, 0.2*a);
+				fillOval(x-0.3*a, y-0.5*a, 0.1*a, 0.2*a);
+				setFillColor("black");
+				fillOval(x+0.3*a, y-0.4*a, 0.04*a, 0.06*a);
+				fillOval(x-0.3*a, y-0.4*a, 0.04*a, 0.06*a);
+				//Mund
+				fillRectCenter(x,y+0.3*a, 0.5*a, 0.2*a);
+			}
+
+		//setTimeout(monster1,5000,500,200,50); // fktname. Zeit in ms, x,y,a)
+	
+		/*x=500
+		function step(){
+			monster1(x,500,50);
+			x=x+30;
+		}
+		setInterval(step, 50);
+		*/
+		function runAnim1(){
+			var x=500;
+			var y=500;
+			var i=0;
+			animation=setInterval(monsterStep1,100);
+			function monsterStep1(){				// nested function 
+				if(i==10)
+					clearInterval(animation);
+				i=i+1
+				monster1(x,y,50);
+				x=x+30;
+			}
+		}
+
+		//runAnim1();
+		function runAnim2(){
+			var x=500, y=500, vx=3, vy=4; dt=10;
+			animation=setInterval(monsterStep2,40);
+			function monsterStep2(){				// nested function 
+				clearScreen();
+				monster1(x,y,50);
+				x=x+vx*dt;
+				y+=vy*dt;
+				if(x>xmax ||x<0) vx=-vx;
+				if(y>ymax ||y<0) vy=-vy;
+			}
+		}	
+		runAnim2();
+		</script>
+			
+		</body>
+</html>
+
+
+
